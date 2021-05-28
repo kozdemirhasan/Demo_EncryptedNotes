@@ -20,19 +20,18 @@ public class MainActivity extends AppCompatActivity {
         String storedUser = sharedPreferences2.getString("storedUser", "");
 
         if (!storedUser.equals("")) {
-            Intent intent = new Intent(getApplicationContext(), NotesListActivity.class);
+            Intent intent = new Intent(getApplicationContext(), NotesMainActivity.class);
             startActivity(intent);
-        }else{
+
+        } else {
             //login olan kullanici yoksa Login (sign in sayfasina gönderiyoruz)
             Intent intent = new Intent(getApplicationContext(), SignInActivity.class);
             startActivity(intent);
+
         }
 
 
-
-
     }
-
 
 
 }

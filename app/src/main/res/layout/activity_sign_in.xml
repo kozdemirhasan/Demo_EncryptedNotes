@@ -3,11 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
     android:layout_marginTop="150dp"
     android:layout_marginLeft="50dp"
     android:layout_marginRight="50dp"
+    android:layout_marginBottom="50dp"
     tools:context=".SignInActivity">
 
 
@@ -23,7 +24,7 @@
 
 
     <EditText
-        android:id="@+id/user_name_sign_in_edit_text"
+        android:id="@+id/userNameSignInEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
@@ -31,7 +32,7 @@
         android:inputType="textPersonName"     />
 
     <EditText
-        android:id="@+id/signUpPasswordEdittext"
+        android:id="@+id/passwordSignInEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="password"
@@ -51,8 +52,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="5dp"
-        android:layout_marginBottom="230dp"
         android:onClick="signInButton"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="10dp"
         android:layout_gravity="center"
         android:text="Sign In"        />
 

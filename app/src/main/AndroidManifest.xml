@@ -9,7 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.EncryptedNotes">
-        <activity android:name=".NotesListActivity"></activity>
+        <activity
+            android:name=".NotesMainActivity"
+            android:label="@string/title_activity_notes_main"
+            android:theme="@style/Theme.EncryptedNotes.NoActionBar"></activity>
         <activity android:name=".SignInActivity" />
         <activity android:name=".SignUpActivity" />
         <activity android:name=".MainActivity">

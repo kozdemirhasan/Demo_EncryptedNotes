@@ -9,12 +9,9 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -35,7 +32,7 @@ public class SignUpActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sign_up);
 
         signUpUserNameEditText = findViewById(R.id.signUpUserNameEditText);
-        signUpPasswordEdittext = findViewById(R.id.signUpPasswordEdittext);
+        signUpPasswordEdittext = findViewById(R.id.passwordSignInEditText);
         signUpPasswordRepeatEditText = findViewById(R.id.signUpPasswordRepeatEditText);
 
     }
@@ -141,7 +138,7 @@ public class SignUpActivity extends AppCompatActivity {
 
             //WICHTIG !!!!!
             //Intent ile tüm sayfalari önce kapatip sonra istedigimiz Sayfaya gidiyoruz
-            Intent intent = new Intent(SignUpActivity.this, NotesListActivity.class);
+            Intent intent = new Intent(SignUpActivity.this, NotesMainActivity.class);
             //bu araya bayrak ekliyerek önce calisan tüm sayfalari kapatiyoruz,
             //daha sonra ManinActivity i yeniden aciyoruz (onCreat metodunun calisabilmesi icin)
             //eger MainActivity de onCreat calismaz ise son eknelenen kaydi göremayiz

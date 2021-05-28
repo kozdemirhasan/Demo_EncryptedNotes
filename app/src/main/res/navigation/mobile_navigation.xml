@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_add_note">
+
+    <fragment
+        android:id="@+id/nav_add_note"
+        android:name="com.kozdemir.encryptednotes.ui.addnote.AddNoteFragment"
+        android:label="@string/menu_add_note"
+        tools:layout="@layout/fragment_add_note" />
+
+    <fragment
+        android:id="@+id/nav_notes"
+        android:name="com.kozdemir.encryptednotes.ui.notes.NotesFragment"
+        android:label="@string/menu_notes"
+        tools:layout="@layout/fragment_notes" />
+
+    <fragment
+        android:id="@+id/nav_settings"
+        android:name="com.kozdemir.encryptednotes.ui.settings.SettingsFragment"
+        android:label="@string/menu_settings"
+        tools:layout="@layout/fragment_settings" />
+
+    <fragment
+        android:id="@+id/nav_logout"
+        android:name="com.kozdemir.encryptednotes.ui.logout.LogoutFragment"
+        android:label="@string/menu_logout"
+        tools:layout="@layout/fragment_logout" />
+
+</navigation>
