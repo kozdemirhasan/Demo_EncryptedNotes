@@ -1,0 +1,2 @@
+rootProject.name = "EncryptedNotes"
+include ':app'

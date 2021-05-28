@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_marginTop="150dp"
+    android:layout_marginLeft="50dp"
+    android:layout_marginRight="50dp"
+    tools:context=".SignInActivity">
+
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Login"
+        android:gravity="center"
+        android:textSize="24sp"
+        android:layout_marginBottom="20dp"
+        android:textStyle="bold" />
+
+
+    <EditText
+        android:id="@+id/user_name_sign_in_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:hint="user name"
+        android:inputType="textPersonName"     />
+
+    <EditText
+        android:id="@+id/signUpPasswordEdittext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="password"
+        android:inputType="textPersonName"
+        android:layout_marginBottom="15dp"/>
+    <TextView
+        android:id="@+id/sign_in_create_new_user"
+        android:layout_width="match_parent"
+        android:gravity="right"
+        android:layout_height="wrap_content"
+        android:onClick="creatNewUser"
+        android:text="Create new user"
+        android:layout_marginBottom="20dp"/>
+
+    <Button
+        android:id="@+id/signUpButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="230dp"
+        android:onClick="signInButton"
+        android:layout_gravity="center"
+        android:text="Sign In"        />
+
+
+
+
+
+
+</LinearLayout>
