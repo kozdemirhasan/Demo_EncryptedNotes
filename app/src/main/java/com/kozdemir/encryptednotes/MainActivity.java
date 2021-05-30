@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -20,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
         String storedUser = sharedPreferences2.getString("storedUser", "");
 
         if (!storedUser.equals("")) {
-            Intent intent = new Intent(getApplicationContext(), NotesMainActivity.class);
+            Intent intent = new Intent(getApplicationContext(), NotesActivity.class);
             startActivity(intent);
 
         } else {

@@ -138,7 +138,7 @@ public class SignUpActivity extends AppCompatActivity {
 
             //WICHTIG !!!!!
             //Intent ile tüm sayfalari önce kapatip sonra istedigimiz Sayfaya gidiyoruz
-            Intent intent = new Intent(SignUpActivity.this, NotesMainActivity.class);
+            Intent intent = new Intent(SignUpActivity.this, NotesActivity.class);
             //bu araya bayrak ekliyerek önce calisan tüm sayfalari kapatiyoruz,
             //daha sonra ManinActivity i yeniden aciyoruz (onCreat metodunun calisabilmesi icin)
             //eger MainActivity de onCreat calismaz ise son eknelenen kaydi göremayiz
