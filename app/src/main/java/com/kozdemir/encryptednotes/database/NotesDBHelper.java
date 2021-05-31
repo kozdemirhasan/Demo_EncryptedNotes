@@ -12,6 +12,7 @@ import com.kozdemir.encryptednotes.pojo.Sabitler;
 
 public class NotesDBHelper extends SQLiteOpenHelper {
 
+
     private static final String CREATE_TABLE_NOTLAR = "create table " + Sabitler.TABLO_NOTLAR
             + " (" + Sabitler.KEY_NOT_ID + " integer primary key autoincrement, "
             + Sabitler.ROW_NOT_USER_NAME + " text  not null, "
@@ -40,10 +41,10 @@ public class NotesDBHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         Log.w("Upgrade islemi", "Tum veriler silinecek !");
-/*
-* Yenisi geldiğinde eski tablodaki tüm veriler silinecek ve
-* tablo yeniden oluşturulacak.
-*/
+        /*
+         * Yenisi geldiğinde eski tablodaki tüm veriler silinecek ve
+         * tablo yeniden oluşturulacak.
+         */
         db.execSQL("drop table if exists " + Sabitler.TABLO_NOTLAR);
         onCreate(db);
     }

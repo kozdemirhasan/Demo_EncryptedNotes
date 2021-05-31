@@ -15,6 +15,9 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.kozdemir.encryptednotes.pojo.Crypt;
+import com.kozdemir.encryptednotes.pojo.Sabitler;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -62,6 +65,8 @@ public class SignUpActivity extends AppCompatActivity {
     public void userCreat(String userName, String password) {
 
         try {
+            Crypt crypt = new Crypt();
+            final String passwordEncrypt = crypt.encrypt(password, password);
             //get Date
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
             LocalDateTime now = LocalDateTime.now();
@@ -77,27 +82,28 @@ public class SignUpActivity extends AppCompatActivity {
             String sqlString = "INSERT INTO users (username, password, date) VALUES (?, ?, ?)";
             SQLiteStatement sqLiteStatement = database.compileStatement(sqlString);
             sqLiteStatement.bindString(1, userName);
-            sqLiteStatement.bindString(2, password);
+            sqLiteStatement.bindString(2,passwordEncrypt);
             sqLiteStatement.bindString(3, date);
             sqLiteStatement.execute();
 
 
             //kullanici basarili bir sekilde olusturuldu ise:
-            Toast.makeText(getApplicationContext(), userName + " created", Toast.LENGTH_LONG).show();
 
             //son kullanici bilgilerini kalici hafizaya kaydet
             sharedPreferences = this.getSharedPreferences("com.kozdemir.encryptednotes", Context.MODE_PRIVATE);
-            String storedUser = sharedPreferences.getString("storedUser", "");
-
+           // String storedUser = sharedPreferences.getString("storedUser", "");
             sharedPreferences.edit().putString("storedUser",userName).apply();
 
+            Toast.makeText(getApplicationContext(), userName + " created", Toast.LENGTH_LONG).show();
 
-            if (!storedUser.equals("")) {
-              //  Toast.makeText(getApplicationContext(), "Son kullanici1111: " + storedUser, Toast.LENGTH_LONG).show();
+            //giris yapilan sifre ve kullanici adini sabitlere kaydediyoruz
+            Sabitler.loginPassword = password;
+            Sabitler.loginUserName = userName;
 
-            }
+            //Notes sayfasina git
+            Intent intent = new Intent(SignUpActivity.this, NotesActivity.class);
+            startActivity(intent);
 
-            getAlleUser();
 
         } catch (Exception e) {
             e.printStackTrace();

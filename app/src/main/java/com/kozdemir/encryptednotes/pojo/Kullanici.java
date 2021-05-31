@@ -1,8 +1,5 @@
-package com.kozdemir.pojo;
+package com.kozdemir.encryptednotes.pojo;
 
-/**
- * Created by Casper on 17.02.2018.
- */
 
 public class Kullanici {
     int kullaniciId;

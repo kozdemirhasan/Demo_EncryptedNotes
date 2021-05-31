@@ -21,11 +21,13 @@ public class MainActivity extends AppCompatActivity {
         if (!storedUser.equals("")) {
             Intent intent = new Intent(getApplicationContext(), NotesActivity.class);
             startActivity(intent);
+            finish();
 
         } else {
             //login olan kullanici yoksa Login (sign in sayfasina gönderiyoruz)
             Intent intent = new Intent(getApplicationContext(), SignInActivity.class);
             startActivity(intent);
+            finish();
 
         }
 

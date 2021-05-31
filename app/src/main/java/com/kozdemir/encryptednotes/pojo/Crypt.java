@@ -1,4 +1,4 @@
-package com.kozdemir.pojo;
+package com.kozdemir.encryptednotes.pojo;
 
 import android.util.Base64;
 

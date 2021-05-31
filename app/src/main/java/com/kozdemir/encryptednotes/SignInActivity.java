@@ -12,6 +12,9 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.kozdemir.encryptednotes.pojo.Crypt;
+import com.kozdemir.encryptednotes.pojo.Sabitler;
+
 public class SignInActivity extends AppCompatActivity {
     EditText userNameSignInEditText;
     EditText passwordSignInEditText;
@@ -33,18 +36,19 @@ public class SignInActivity extends AppCompatActivity {
     }
 
     public void signInButton(View view) {
-        String userName = userNameSignInEditText.getText().toString();
-        String password = passwordSignInEditText.getText().toString();
-
-        String databaseUserName = "";
-        String databasePassword = "";
-
         try {
+
+            Crypt crypt = new Crypt();
+            final String userName = userNameSignInEditText.getText().toString();
+            final String password = passwordSignInEditText.getText().toString();
+            final String userNameEncrypt = crypt.encrypt(userName, password);
+            final String passwordEncrypt = crypt.encrypt(password, password);
+
+
             database = this.openOrCreateDatabase("EncryptedDB", MODE_PRIVATE, null);
             Cursor cursor = database.rawQuery("SELECT * FROM users WHERE username =? AND password =?",
-                    new String[]{userName, password});
+                    new String[]{userName, passwordEncrypt});
 
-            //  new String[]{userNameSignInEditText.getText().toString()});
 
             int userNameIndex = cursor.getColumnIndex("username");
             int passwordIndex = cursor.getColumnIndex("password");
@@ -52,9 +56,26 @@ public class SignInActivity extends AppCompatActivity {
 
 
             while (cursor.moveToNext()) {
+                if (userName.equals(cursor.getString(userNameIndex)) &&
+                        passwordEncrypt.equals(cursor.getString(passwordIndex))) {
 
-                databaseUserName = cursor.getString(userNameIndex);
-                databasePassword = cursor.getString(passwordIndex);
+                //giris yapan kullnaiciyi local db kayit ediyoruz
+                    SharedPreferences sharedPreferences = this.getSharedPreferences("com.kozdemir.encryptednotes", Context.MODE_PRIVATE);
+                    //  String storedUser = sharedPreferences.getString("storedUser", "");
+                    sharedPreferences.edit().putString("storedUser", userName).apply();
+
+                    //giris yapilan sifre ve kullanici adini sabitlere kaydediyoruz
+                    Sabitler.loginPassword = password;
+                    Sabitler.loginUserName = userName;
+
+                    //kullanici kayitli ise NotesActivity e git
+                    Intent intent = new Intent(SignInActivity.this, NotesActivity.class);
+                    startActivity(intent);
+
+                } else {
+                    Toast.makeText(getApplicationContext(), "Falsch user name und/oder password", Toast.LENGTH_LONG).show();
+                }
+
 
             }
             cursor.close();
@@ -64,17 +85,5 @@ public class SignInActivity extends AppCompatActivity {
         }
 
 
-        if (userName.equals(databaseUserName) && password.equals(databasePassword)) {
-            //giris yapan kullnaiciyi local db kayit ediyoruz
-            SharedPreferences sharedPreferences = this.getSharedPreferences("com.kozdemir.encryptednotes", Context.MODE_PRIVATE);
-            //  String storedUser = sharedPreferences.getString("storedUser", "");
-            sharedPreferences.edit().putString("storedUser", userName).apply();
-
-            //kullanici kayitli ise NotesListActivity e git
-            Intent intent = new Intent(SignInActivity.this, NotesActivity.class);
-            startActivity(intent);
-        } else {
-            Toast.makeText(getApplicationContext(), "Falsch user name und/oder password", Toast.LENGTH_LONG).show();
-        }
     }
 }

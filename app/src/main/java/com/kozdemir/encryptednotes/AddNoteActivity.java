@@ -1,18 +1,22 @@
 package com.kozdemir.encryptednotes;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.text.InputType;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.PopupMenu;
 import android.widget.TextView;
@@ -20,10 +24,13 @@ import android.widget.Toast;
 
 import com.kozdemir.encryptednotes.database.NotesDatabase;
 import com.kozdemir.encryptednotes.pojo.Sabitler;
+import com.kozdemir.encryptednotes.pojo.Crypt;
+
 
 import java.util.ArrayList;
 
-public class AddNoteActivity extends AppCompatActivity {
+
+public class AddNoteActivity extends Activity {
     Vibrator vib;
     NotesDatabase dba;
     EditText titleEditText, bodyEdittext;
@@ -45,7 +52,7 @@ public class AddNoteActivity extends AppCompatActivity {
 
 
     //add Note butonuna tiklandiginda
-    public void noteAddButton(View view) {
+    public void addNoteButton(View view) {
         vib.vibrate(40);
 
         try {
@@ -53,7 +60,7 @@ public class AddNoteActivity extends AppCompatActivity {
             dba.ac();
 
             /*
-             * Not ekleme alanları boş ise uyarı ver değilse notu ekle*/
+             * Note ekleme alanları boş ise uyarı ver değilse notu ekle*/
 
             if (titleEditText.getText().length() != 0 && bodyEdittext.getText().length() != 0) {
 
@@ -79,10 +86,11 @@ public class AddNoteActivity extends AppCompatActivity {
 
         protected void onPreExecute() {
             progressDialog = ProgressDialog.show(AddNoteActivity.this,
-                    "Not kaydediliyor",
+                    "Note kaydediliyor",
                     "Lütfen bekleyiniz...");
         }
 
+        @RequiresApi(api = Build.VERSION_CODES.O)
         @Override
         protected Void doInBackground(String... params) {
 
@@ -113,26 +121,28 @@ public class AddNoteActivity extends AppCompatActivity {
      */
 
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public void notEkle() {
 
         try {
-            long x = dba.notEkle(titleEditText.getText().toString(), bodyEdittext.getText()
-                    .toString(), secilenGrup);
+            long x = dba.notEkle(titleEditText.getText().toString(), bodyEdittext.getText().toString(), secilenGrup);
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            dba.kapat();
         }
-        dba.kapat();
+
 
     }
 
-    public void groupButton(View view){
+    public void groupButton(View view) {
         vib.vibrate(30);
 
         grupSec(view, grupElemanlari());
     }
 
     private void grupSec(final View anchor, ArrayList<String> grupItems) {
-        com.kozdemir.pojo.Crypt crypt = new com.kozdemir.pojo.Crypt();
+        Crypt crypt = new Crypt();
         PopupMenu popupMenu = new PopupMenu(anchor.getContext(), anchor);
         popupMenu.getMenu().add("DEFAULT");
         for (int i = 0; i < grupItems.size(); i++) {
@@ -157,6 +167,7 @@ public class AddNoteActivity extends AppCompatActivity {
                     //yeni grup ekleme ekranı gelsin
 
                     yeniGrupAl();
+
                 } else {
                     twGruplar.setText(secilenGrup);
                 }
